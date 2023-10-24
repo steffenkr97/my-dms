@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <main class="container">
+    <div>
+      <h2>Upload PDF</h2>
+      <div>
+        <form>
+          <form id="upload-form" hx-post="/document" enctype="multipart/form-data" hx-target="replace" hx-swap="outerHTML">
+            <input type="file" name="file" id="file" required>
+            <input type="text" name="title" placeholder="Title">
+            <input type="text" name="author" placeholder="Author">
+            <textarea name="description" placeholder="Description"></textarea>
+            <input type="text" name="keywords" placeholder="Keywords">
+            <button type="submit">Upload PDF</button>
+          </form>
+        </form>
+      </div>
+
+    </div>
+    </main>
+  </body>
+</html>

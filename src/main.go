@@ -2,6 +2,7 @@ package main
 
 import (
 	routes "my-dms/routes"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,7 +10,12 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.POST("/", routes.CreatePost)
+	// Load Home Page
+	router.LoadHTMLGlob("static/*")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
+	// router.POST("/", routes.CreatePost)
 
 	router.GET("getAll", routes.ReadAllPosts)
 
@@ -21,6 +27,8 @@ func main() {
 
 	// called as localhost:3000/delete/{id}
 	router.DELETE("/delete/:postId", routes.DeletePost)
+
+	router.POST("/document", routes.SaveDocument)
 
 	router.Run("localhost: 3000")
 }

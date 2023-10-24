@@ -15,6 +15,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// func GetHomePage(c *gin.Context) {
+// 	c.HTML(200, "../static/index.html", nil)
+// }
+
 func ReadAllPosts(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	DB := database.ConnectDB()
