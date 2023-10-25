@@ -11,10 +11,11 @@ type Post struct {
 }
 
 type DocumentMeta struct {
-	ID       primitive.ObjectID
-	Title    string   `json:"title"`
-	Author   string   `json:"author"`
-	FileName string   `json:"fileName"`
-	Keywords []string `json:"keywords"`
-	FullText string   `json:"fullText"`
+	ID          primitive.ObjectID
+	Title       string   `json:"title"`
+	Author      string   `json:"author"`
+	FileName    string   `json:"fileName"`
+	Description string   `json:"description"`
+	Keywords    []string `json:"keywords"`
+	FullText    string   `json:"fullText"`
 }

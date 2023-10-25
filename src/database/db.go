@@ -17,8 +17,18 @@ func ConnectDB() *mongo.Client {
 	creds.Password = "rootpassword"
 
 	Mongo_URL := "mongodb://127.0.0.1:27017"
+
+	// client, err := mongo.Connect(
+	// 	context.Background(),
+	// 	options.Client().ApplyURI(Mongo_URL).SetAuth(creds),
+	// )
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
 	client, err := mongo.NewClient(options.Client().ApplyURI(Mongo_URL).SetAuth(creds))
 	if err != nil {
+		fmt.Println(err)
 		log.Fatal(err)
 	}
 
@@ -27,6 +37,7 @@ func ConnectDB() *mongo.Client {
 	defer cancel()
 
 	if err != nil {
+		fmt.Println(err)
 		log.Fatal(err)
 	}
 

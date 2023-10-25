@@ -1,29 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document Upload</title>
+    <!-- HTMX-Bibliothek laden -->
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <!-- Styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>Hello, world!</title>
   </head>
   <body>
-    <main class="container">
-    <div>
-      <h2>Upload PDF</h2>
-      <div>
-        <form>
-          <form id="upload-form" hx-post="/document" enctype="multipart/form-data" hx-target="replace" hx-swap="outerHTML">
-            <input type="file" name="file" id="file" required>
-            <input type="text" name="title" placeholder="Title">
-            <input type="text" name="author" placeholder="Author">
-            <textarea name="description" placeholder="Description"></textarea>
-            <input type="text" name="keywords" placeholder="Keywords">
-            <button type="submit">Upload PDF</button>
-          </form>
-        </form>
-      </div>
 
-    </div>
+    <main class="container">
+      <h1>Document Upload</h1>
+
+      <!-- Formular mit HTMX-Attributen -->
+      <form id="upload-form" hx-post="/document" hx-swap="outerHTML" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" id="pdf_file" required>
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="author" placeholder="Author">
+        <textarea name="description" placeholder="Description"></textarea>
+        <input type="text" name="keywords" placeholder="Keywords">
+        <button type="submit">Upload Document</button>
+      </form>
+      <div id="response"></div>
     </main>
+
+    <script>
+      document.getElementById('upload-form').addEventListener('htmx:response', function (event) {
+        if (event.detail.verb === 'post') {
+          const responseElement = document.getElementById('response');
+          if (event.detail.status === 200) {
+            responseElement.innerText = 'Dokument erfolgreich hochgeladen.';
+            window.alert("erfolgreich");
+            window.location.href = '/';  // Redirect zur Startseite
+          } else {
+            responseElement.innerText = 'Fehler beim Hochladen des Dokuments: ' + event.detail.statusText;
+          }
+        }
+      });
+    </script>
   </body>
 </html>

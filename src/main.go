@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	routes "my-dms/routes"
 	"net/http"
 
@@ -14,6 +15,8 @@ func main() {
 	router.LoadHTMLGlob("static/*")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
+
+		fmt.Print("Ich wurde als Startseite aufgerufen!!!!!")
 	})
 	// router.POST("/", routes.CreatePost)
 
